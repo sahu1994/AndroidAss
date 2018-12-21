@@ -19,6 +19,10 @@
         <activity android:name=".views.GridActivity"
 
             ></activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value=" AIzaSyCRLa4LQZWNQBcjCYcIVYA45i9i8zfClqc"/>
     </application>
 
 </manifest>

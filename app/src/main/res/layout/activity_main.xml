@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="-60dp"
                 android:paddingBottom="5dp"
-                android:src="@android:drawable/ic_menu_gallery" />
+                android:src="@android:drawable/ic_input_add" />
         </LinearLayout>
 
         <LinearLayout
@@ -244,7 +244,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@android:drawable/ic_menu_gallery" />
+                android:background="@drawable/plus_file" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rvThumbnails"

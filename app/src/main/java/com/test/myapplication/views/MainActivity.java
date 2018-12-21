@@ -323,12 +323,12 @@ public class MainActivity extends AppCompatActivity implements View.OnFocusChang
     public void showBottomsheet() {
         View view = getLayoutInflater().inflate(R.layout.fragment_bottom_sheet_dialog, null);
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
-        initBottomSheet(view);
+        initBottomSheet(view,bottomSheetDialog);
         bottomSheetDialog.setContentView(view);
         bottomSheetDialog.show();
     }
 
-    private void initBottomSheet(View view) {
+    private void initBottomSheet(View view, final BottomSheetDialog bottomSheetDialog) {
         LinearLayout llCaptureCamera = view.findViewById(R.id.llCaptureCamera);
         LinearLayout llCapturePhotoVideo = view.findViewById(R.id.llCapturePhotoVideo);
         LinearLayout llCapturePhotoLibrary = view.findViewById(R.id.llCapturePhotoLibrary);
@@ -341,6 +341,7 @@ public class MainActivity extends AppCompatActivity implements View.OnFocusChang
                 if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
                     startActivityForResult(takePictureIntent, CAMERA_REQUEST);
                 }
+                bottomSheetDialog.dismiss();
             }
         });
         llCapturePhotoVideo.setOnClickListener(new View.OnClickListener() {
@@ -350,6 +351,7 @@ public class MainActivity extends AppCompatActivity implements View.OnFocusChang
                 if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
                     startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
                 }
+                bottomSheetDialog.dismiss();
             }
         });
         llCapturePhotoLibrary.setOnClickListener(new View.OnClickListener() {
@@ -358,6 +360,7 @@ public class MainActivity extends AppCompatActivity implements View.OnFocusChang
                 Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 pickIntent.setType("image/* video/*");
                 startActivityForResult(pickIntent, IMAGE_PICKER_SELECT);
+                bottomSheetDialog.dismiss();
             }
         });
         llCaptureDocument.setOnClickListener(new View.OnClickListener() {
@@ -366,6 +369,7 @@ public class MainActivity extends AppCompatActivity implements View.OnFocusChang
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                 intent.setType("file/*");
                 startActivityForResult(intent, PICKFILE_REQUEST_CODE);
+                bottomSheetDialog.dismiss();
             }
         });
 

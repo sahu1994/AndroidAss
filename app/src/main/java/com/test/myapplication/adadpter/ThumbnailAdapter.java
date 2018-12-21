@@ -1,7 +1,10 @@
 package com.test.myapplication.adadpter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.media.ThumbnailUtils;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

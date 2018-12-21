@@ -9,6 +9,7 @@
     app:cardCornerRadius="0dp">
 
     <RelativeLayout
+        android:background="@android:color/darker_gray"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -19,12 +20,13 @@
              />
 
         <TextView
+            android:id="@+id/tvBottomText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="#80000000"
             android:gravity="center"
-            android:text="Flooring"
+            android:text="Un Selected"
             android:textAlignment="center"
             android:textColor="#ffffff" />
     </RelativeLayout>

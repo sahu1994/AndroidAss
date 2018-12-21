@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.test.myapplication.R;
 import com.test.myapplication.listeners.SelectedCallback;
@@ -40,7 +41,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull final ImageAdapter.ViewHolder viewHolder, final int position) {
-        viewHolder.ivImageItem.setImageResource(images.get(position));
+        viewHolder.ivImageItem.setImageResource(R.drawable.image_withour_flip);
         viewHolder.ivImageItem.setOnClickListener(new View.OnClickListener() {
             private boolean isFlipped;
 
@@ -50,13 +51,14 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
                     AnimatorSet shrinkSet = (AnimatorSet) AnimatorInflater.loadAnimator(mContext, R.animator.shrink_to_middle);
                     shrinkSet.setTarget(viewHolder.ivImageItem);
                     shrinkSet.start();
-                    viewHolder.ivImageItem.setImageResource(R.drawable.ic_launcher_background);
                     imageStatuses.get(position).setSelected(true);
+                    viewHolder.tvText.setText("Selected");
                 } else {
                     AnimatorSet growSet = (AnimatorSet) AnimatorInflater.loadAnimator(mContext, R.animator.grow_from_middle);
                     growSet.setTarget(viewHolder.ivImageItem);
                     growSet.start();
                     imageStatuses.get(position).setSelected(false);
+                    viewHolder.tvText.setText("Un Selected");
                 }
                 isFlipped = !isFlipped;
                 selectedCallback.onSelection(getTotalCount());
@@ -84,10 +86,12 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
     class ViewHolder extends RecyclerView.ViewHolder {
 
         private final ImageView ivImageItem;
+        private final TextView tvText;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ivImageItem = itemView.findViewById(R.id.ivImageItem);
+            tvText = itemView.findViewById(R.id.tvBottomText);
         }
     }
 }
