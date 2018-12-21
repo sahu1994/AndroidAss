@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="characters_left">Characters Left</string>
+    <string name="photo_video_library"><![CDATA[Photo & Video Library]]></string>
+</resources>
