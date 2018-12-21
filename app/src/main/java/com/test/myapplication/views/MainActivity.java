@@ -1,34 +1,26 @@
 package com.test.myapplication.views;
 
-import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialog;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
@@ -269,25 +261,23 @@ public class MainActivity extends AppCompatActivity implements View.OnFocusChang
                 Place place = PlaceAutocomplete.getPlace(this, data);
                 etpostLocation.setText(place.getAddress().toString());
             } else if (requestCode == IMAGE_PICKER_SELECT) {
-                uriList.add(data.getData());
-                updateList();
+                updateList(data);
             } else if (requestCode == PICKFILE_REQUEST_CODE) {
-                uriList.add(data.getData());
-                updateList();
+                updateList(data);
             } else if (requestCode == CAMERA_REQUEST) {
-                uriList.add(data.getData());
-                updateList();
+                updateList(data);
             } else if (requestCode == REQUEST_VIDEO_CAPTURE) {
-                uriList.add(data.getData());
-                updateList();
+                updateList(data);
             }
 
         }
     }
 
-    private void updateList() {
+    private void updateList(Intent data) {
+        uriList.add(0, data.getData());
         thumbnailAdapter.updateItems(uriList);
-        thumbnailAdapter.notifyDataSetChanged();
+        thumbnailAdapter.notifyItemInserted(0);
+        rvThumbnails.smoothScrollToPosition(0);
     }
 
 
@@ -323,7 +313,7 @@ public class MainActivity extends AppCompatActivity implements View.OnFocusChang
     public void showBottomsheet() {
         View view = getLayoutInflater().inflate(R.layout.fragment_bottom_sheet_dialog, null);
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
-        initBottomSheet(view,bottomSheetDialog);
+        initBottomSheet(view, bottomSheetDialog);
         bottomSheetDialog.setContentView(view);
         bottomSheetDialog.show();
     }
